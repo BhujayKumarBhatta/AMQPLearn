@@ -20,7 +20,21 @@ In order to debug this kind of mistake you can use rabbitmqctl to
 crdn = pika.PlainCredentials('rabbit', 'welcome@123')
 connection = pika.BlockingConnection(pika.ConnectionParameters('uvm3', credentials=crdn))
 chnnel = connection.channel()
-chnnel.queue_declare(queue='hello')
+'''
+When RabbitMQ quits or crashes it will forget the queues and messages
+ unless you tell it not to. Two things are required to make sure that 
+ messages aren't lost: we need to mark both the queue and messages as durable.
+ 1. durable queue
+ 2. publish with delivery mode 2
+'''
+chnnel.queue_declare(queue='hello')  # can't be changed once declared
+chnnel.queue_declare(queue='task_queue', durable = True)
+'''don't dispatch a new message to a worker until it has processed 
+and acknowledged the previous one. Instead, it will dispatch it to 
+the next worker that is not still busy.
+'''
+chnnel.basic_qos(prefetch_count=1)
+
 #chnnel.basic_consume(callback, queue='hello', no_ack=True)
 # re-deliver the message even when the consumer dies
 chnnel.basic_consume(callback, queue='hello')
