@@ -8,7 +8,7 @@ chnnel = connection.channel()
 
 chnnel.queue_declare(queue='hello')
 
-chnnel.basic_publish(exchange='',routing_key='hello',body='hello bhujay')
+chnnel.basic_publish(exchange='', routing_key='hello', body='hello bhujay')
 
 ####################################################################################
 

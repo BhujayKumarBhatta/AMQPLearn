@@ -11,7 +11,7 @@ message = ' '.join(sys.argv[1:]) or 'Hello World!'
 
 # make the messages persistent even after rabbitmq server restarts
 chnnel.basic_publish(exchange='log',
-                     routing_key='hello',
+                     routing_key='',
                      body= message,
                      properties = pika.BasicProperties(delivery_mode = 2 ))
 #stronger guarantee then you can use publisher confirms.
