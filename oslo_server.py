@@ -91,6 +91,7 @@ conf', 'decorate_ordered', 'dispatcher', 'executor_type', 'listener', 'reset', '
 '192.168.111.139'
 
 '''
+log.info('starting server')
 server.start()
 
 
