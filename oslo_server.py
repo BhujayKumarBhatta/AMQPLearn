@@ -70,7 +70,7 @@ transport = om.get_transport(CONF, transport_url)
 >>> transport.conf.rabbit.get('rabbit_host', )
 'uvm3'
 '''
-target = om.Target(topic = 'testme', server = '192.168.111.1')
+target = om.Target(topic = 'testme', server = '192.168.111.140')
 
 # # create endpoints
 class TestEndpoint(object):
