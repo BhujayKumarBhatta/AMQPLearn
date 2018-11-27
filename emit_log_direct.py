@@ -2,7 +2,7 @@
 import pika
 import sys
 
-crdn = pika.PlainCredentials('rabbit', 'welcome@123')
+crdn = pika.PlainCredentials('user1', 'welcome123')
 connection = pika.BlockingConnection(pika.ConnectionParameters('uvm3', credentials=crdn))
 channel = connection.channel()
 
@@ -16,3 +16,15 @@ channel.basic_publish(exchange='direct_logs',
                       body=message)
 print(" [x] Sent %r:%r" % (severity, message))
 connection.close()
+
+
+'''
+root@ubuntu:/home/ubuntu#
+root@ubuntu:/home/ubuntu# rabbitmqctl  add_user  user1 welcome123
+Adding user "user1" ...
+root@ubuntu:/home/ubuntu# rabbitmqctl set_permissions -p / user1  '.*' '.*' '.*'
+Setting permissions for user "user1" in vhost "/" ...
+root@ubuntu:/home/ubuntu# rabbitmqctl  set_user_tags   user1 administrator
+Setting tags for user "user1" to [administrator] ...
+root@ubuntu:/home/ubuntu#
+'''

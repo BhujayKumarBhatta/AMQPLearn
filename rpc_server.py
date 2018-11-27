@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import pika
-
 import sys
 
 crdn = pika.PlainCredentials('rabbit', 'welcome@123')
